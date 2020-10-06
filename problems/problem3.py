@@ -13,5 +13,6 @@ def is_prime(n):
 def largest_prime_factor(x):
     return [i for i in range(1, x + 1) if is_prime(i) and x % i == 0][-1]
 
-print(largest_prime_factor(600851475143))
+def problem():
+    return largest_prime_factor(600851475143)
 

@@ -4,5 +4,5 @@ def fibonacci(max_n):
         yield n
         n, prev = n + prev, n
 
-total = sum(n for n in fibonacci(4000000) if n % 2 == 0)
-print(total)
+def problem():
+    return sum(n for n in fibonacci(4000000) if n % 2 == 0)

@@ -16,5 +16,5 @@ def lcm(a, b):
 def lcm_seq(seq):
     return reduce(lcm, seq)
 
-a = lcm_seq(range(1, 21))
-print(a)
+def problem():
+    return lcm_seq(range(1, 21))
