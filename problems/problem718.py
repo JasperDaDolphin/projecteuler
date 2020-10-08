@@ -1,7 +1,8 @@
 import multiprocess as mp
-import itertools
+from math import ceil
 
-def equ(a, b, c, p, n):
+def equ(t):
+    a, b, c, p, n = t
     return ((17**p)*a + (19**p)*b + (23**p)*c) == n
 
 def find_representation(a, b, c, n):
@@ -22,22 +23,19 @@ def frobenius_number(a, b, c):
         base = n
     n += 1
 
-def reachable(n, p):
-    if n < 17**p + 19**p + 23**p:
-        print(n)
-        return False
-    for a in range(1, n):
-        for b in range(1, n):
-            for c in range(1, n):
-                if equ(a, b, c, p, n):
-                    return True
-    print(n)
-    return False
+def reachable(pool, p, n):
+    inputs = ((a, b, c, p, n) for a in range(1, ceil(n/17)) for b in range(1, ceil(n/19)) for c in range(1, ceil(n/23)))
+    results = pool.map(equ, inputs)
+    return max(results)
 
-def G(p):    
+def G(p):
+    pool = mp.Pool(processes=1) 
+    min_n = 17**p + 19**p + 23**p
     max_n = frobenius_number(17**p, 19**p, 23**p) + 17**p + 19**p + 23**p
-    a = max_n + sum(n for n in range(1, max_n) if not reachable(n, p))
+    a = sum(m for m in range(min_n)) + max_n + sum(n for n in range(min_n, max_n) if not reachable(pool, p, n))
+    pool.close()
+    pool.join()
     return a
 
 def problem():
-    return G(1)
+    return G(2)

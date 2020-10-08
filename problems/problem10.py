@@ -1,4 +1,3 @@
-from math import ceil
 def is_prime(n):
     if n < 2: 
          return False
@@ -11,13 +10,5 @@ def is_prime(n):
          k += 2
     return True
 
-def largest_prime_factor(x):
-    r=x-2
-    if x%2==0:
-        r=x-1
-    for i in range(r, 2, -2):
-        if is_prime(i) and x % i==0:
-            return i
-
 def problem():
-    return largest_prime_factor(600851475143)
+    return sum([x for x in range(2, 2000000) if is_prime(x)])
