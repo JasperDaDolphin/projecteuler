@@ -30,7 +30,7 @@ def main(n):
         logging.info("Time: {0}\n".format(time.time() - t))
     else:
         _file = open(problem_file, "a")
-        _file.write("def problem():\n\treturn None")
+        _file.write("#!/usr/bin/python\n\n\ndef problem():\n\treturn None")
         _file.close()
 
 if __name__ == "__main__":
